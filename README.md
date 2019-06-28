@@ -128,11 +128,8 @@ L'installation ce fait en une seul ligne de commande.</p>
 </code></pre>
 <p>Vue que c’est un docker “l’installation”" ce fait aussi en une seul ligne de commande.</p>
 Dans nos DNS on ajoute des sous-domaines :<br>
-<img src=" 
-![enter image description here](https://i.imgur.com/3bwtS50.png" alt=")
-![enter image description here"><br>
-<img src="](https://i.imgur.com/JPef8bm.png" alt="enter image description here"></p>
-<p>)
+![](https://i.imgur.com/3bwtS50.png)
+![](https://i.imgur.com/JPef8bm.png)
 
 On modifie les virtual-host pour les faire fonctionner avec les sous-domaines :</p>
 <pre><code>&lt;VirtualHost *:80ServerAdmin hugomarques.hugomarques@hugomarques.fr
@@ -200,5 +197,6 @@ DocumentRoot /var/www/html/
 </code></pre>
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNDczNTg3OTldfQ==
+eyJoaXN0b3J5IjpbLTE2MDA4MzIwMzUsLTIwNDczNTg3OTldfQ
+==
 -->
