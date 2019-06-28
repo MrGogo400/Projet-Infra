@@ -181,9 +181,11 @@ Code :
   
 Notre serveur LAMP est installé.
 
-## Suite à ça 
+## Suite à ça on installe installe les applications web que l'on souhaite.
+
+
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjI1NDk4MDk3XX0=
+eyJoaXN0b3J5IjpbMTIyMDU5NTUwMF19
 -->
