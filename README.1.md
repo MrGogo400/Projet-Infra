@@ -183,9 +183,14 @@ Notre serveur LAMP est installé.
 
 ## Suite à ça on installe installe les applications web que l'on souhaite.
 
+### NetData :
+
+    bash <(curl -Ss https://my-netdata.io/kickstart.sh)
+
+L'installation ce fait en une seul ligne de commande.
 
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIyMDU5NTUwMF19
+eyJoaXN0b3J5IjpbLTk2NDY2Mzg5OCwxMjIwNTk1NTAwXX0=
 -->
