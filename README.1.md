@@ -199,8 +199,8 @@ L'installation ce fait en une seul ligne de commande.
 Vue que c'est un docker "l'installation" ce fait aussi en une seul ligne de commande.
 
 Dans nos DNS on ajoute des sous-domaines : 
-https://i.imgur.com/3bwtS50.png
-
+![enter image description here](https://i.imgur.com/3bwtS50.png)
+![enter image description here](https://i.imgur.com/JPef8bm.png)
 
 On modifie les virtual-host pour les faire fonctionner avec les sous-domaines : 
 
@@ -274,6 +274,6 @@ On modifie les virtual-host pour les faire fonctionner avec les sous-domaines :
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTY1NjY5NjYsLTk2NDY2Mzg5OCwxMjIwNT
-k1NTAwXX0=
+eyJoaXN0b3J5IjpbLTE2OTM0MjM1MTUsLTk2NDY2Mzg5OCwxMj
+IwNTk1NTAwXX0=
 -->
