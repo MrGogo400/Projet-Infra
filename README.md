@@ -95,4 +95,82 @@ Code :</p>
 <pre><code>systemctl enable mariadb
 </code></pre>
 <p>Notre serveur LAMP est installé.</p>
+<p>Installe docker :</p>
+<p><a href="https://docs.docker.com/install/linux/docker-ce/debian/">https://docs.docker.com/install/linux/docker-ce/debian/</a></p>
+<h2 id="suite-à-ça-on-installe-installe-les-applications-web-que-lon-souhaite.">Suite à ça on installe installe les applications web que l’on souhaite.</h2>
+<h3 id="netdata-">NetData :</h3>
+<pre><code>bash &lt;(curl -Ss https://my-netdata.io/kickstart.sh)
+</code></pre>
+<p>L’installation ce fait en une seul ligne de commande.</p>
+<h3 id="cloud-torrent-">Cloud-Torrent :</h3>
+<pre><code>docker run -d -p 3000:3000 -v /path/to/my/downloads:/downloads jpillora/cloud-torrent
+</code></pre>
+<p>Vue que c’est un docker “l’installation” ce fait aussi en une seul ligne de commande.</p>
+<p>Dans nos DNS on ajoute des sous-domaines :<br>
+<img src="https://i.imgur.com/3bwtS50.png" alt="enter image description here"><br>
+<img src="https://i.imgur.com/JPef8bm.png" alt="enter image description here"></p>
+<p>On modifie les virtual-host pour les faire fonctionner avec les sous-domaines :</p>
+<pre><code>&lt;VirtualHost *:80&gt;
+  ServerAdmin hugomarques.hugomarques@hugomarques.fr
+  DocumentRoot /var/www/html
+  &lt;Directory /var/www/html/&gt;
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride All
+    Require all granted
+  &lt;/Directory&gt;
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  # Possible values include: debug, info, notice, warn, error, crit,
+  # alert, emerg.
+  LogLevel warn
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:443&gt;
+    ServerName hugomarques.fr  
+    ServerAlias www.hugomarques.fr
+    ServerAdmin hugomarques.hugomarques@hugomarques.fr
+    DocumentRoot /var/www/html/          
+ 
+       # directives obligatoires pour TLS
+        SSLEngine on
+        SSLCertificateFile    /etc/letsencrypt/live/hugomarques.fr-0001/fullchain.pem
+        SSLCertificateKeyFile   /etc/letsencrypt/live/hugomarques.fr-0001/privkey.pem
+ 
+        ErrorLog /var/log/apache2/error.hugomarques.fr.log
+        CustomLog /var/log/apache2/access.hugomarques.fr.log combined
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:80&gt;
+	ServerName wp.hugomarques.fr
+  ServerAlias www.wp.hugomarques.fr
+	ServerAdmin contact@hugomarques.fr
+	DocumentRoot /var/www/wp/
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:80&gt;
+	ServerName torrent.hugomarques.fr
+	ServerAlias www.torrent.hugomarques.fr
+	ProxyPreserveHost On
+	ProxyPass / http://hugomarques.fr:3000/
+	ProxyPassReverse / http://hugomarques.fr:3000/
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:80&gt;
+	ServerName monitor.hugomarques.fr
+  ServerAlias www.monitor.hugomarques.fr
+	ProxyPreserveHost On
+	ProxyPass / http://localhost:19999/
+	ProxyPassReverse / http://localhost:19999/
+
+  &lt;Location /&gt;
+    AuthType Basic
+    AuthName "Protected site"
+    AuthUserFile /etc/apache2/.htpasswd
+    Require valid-user
+    Order deny,allow
+    Allow from all
+  &lt;/Location&gt;
+
+&lt;/VirtualHost&gt;
+</code></pre>
 
