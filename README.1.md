@@ -181,6 +181,10 @@ Code :
   
 Notre serveur LAMP est installé.
 
+Installe docker : 
+
+[https://docs.docker.com/install/linux/docker-ce/debian/](https://docs.docker.com/install/linux/docker-ce/debian/)
+
 ## Suite à ça on installe installe les applications web que l'on souhaite.
 
 ### NetData :
@@ -193,7 +197,79 @@ L'installation ce fait en une seul ligne de commande.
 
     docker run -d -p 3000:3000 -v /path/to/my/downloads:/downloads jpillora/cloud-torrent
 Vue que c'est un docker "l'installation" ce fait aussi en une seul ligne de commande.
+
+On modifie les virtual-host pour les faire fonctionner avec les sous-domaines : 
+
+
+    <VirtualHost *:80>
+      ServerAdmin hugomarques.hugomarques@hugomarques.fr
+      DocumentRoot /var/www/html
+      <Directory /var/www/html/>
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        Require all granted
+      </Directory>
+      ErrorLog ${APACHE_LOG_DIR}/error.log
+      # Possible values include: debug, info, notice, warn, error, crit,
+      # alert, emerg.
+      LogLevel warn
+      CustomLog ${APACHE_LOG_DIR}/access.log combined
+    </VirtualHost>
+    
+    <VirtualHost *:443>
+        ServerName hugomarques.fr  
+        ServerAlias www.hugomarques.fr
+        ServerAdmin hugomarques.hugomarques@hugomarques.fr
+        DocumentRoot /var/www/html/          
+     
+           # directives obligatoires pour TLS
+            SSLEngine on
+            SSLCertificateFile    /etc/letsencrypt/live/hugomarques.fr-0001/fullchain.pem
+            SSLCertificateKeyFile   /etc/letsencrypt/live/hugomarques.fr-0001/privkey.pem
+     
+            ErrorLog /var/log/apache2/error.hugomarques.fr.log
+            CustomLog /var/log/apache2/access.hugomarques.fr.log combined
+    </VirtualHost>
+    
+    <VirtualHost *:80>
+    	ServerName wp.hugomarques.fr
+      ServerAlias www.wp.hugomarques.fr
+    	ServerAdmin contact@hugomarques.fr
+    	DocumentRoot /var/www/wp/
+    </VirtualHost>
+    
+    <VirtualHost *:80>
+    	ServerName torrent.hugomarques.fr
+    	ServerAlias www.torrent.hugomarques.fr
+    	ProxyPreserveHost On
+    	ProxyPass / http://hugomarques.fr:3000/
+    	ProxyPassReverse / http://hugomarques.fr:3000/
+    </VirtualHost>
+    
+    <VirtualHost *:80>
+    	ServerName monitor.hugomarques.fr
+      ServerAlias www.monitor.hugomarques.fr
+    	ProxyPreserveHost On
+    	ProxyPass / http://localhost:19999/
+    	ProxyPassReverse / http://localhost:19999/
+    
+      <Location />
+        AuthType Basic
+        AuthName "Protected site"
+        AuthUserFile /etc/apache2/.htpasswd
+        Require valid-user
+        Order deny,allow
+        Allow from all
+      </Location>
+    
+    </VirtualHost>
+
+
+
+
+
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzcyMjU2NjQ2LC05NjQ2NjM4OTgsMTIyMD
-U5NTUwMF19
+eyJoaXN0b3J5IjpbLTYwNzI2MjY2NiwtOTY0NjYzODk4LDEyMj
+A1OTU1MDBdfQ==
 -->
