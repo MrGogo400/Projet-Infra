@@ -198,6 +198,10 @@ L'installation ce fait en une seul ligne de commande.
     docker run -d -p 3000:3000 -v /path/to/my/downloads:/downloads jpillora/cloud-torrent
 Vue que c'est un docker "l'installation" ce fait aussi en une seul ligne de commande.
 
+Dans nos DNS on ajoute des sous-domaines : 
+https://i.imgur.com/3bwtS50.png
+
+
 On modifie les virtual-host pour les faire fonctionner avec les sous-domaines : 
 
 
@@ -270,6 +274,6 @@ On modifie les virtual-host pour les faire fonctionner avec les sous-domaines :
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYwNzI2MjY2NiwtOTY0NjYzODk4LDEyMj
-A1OTU1MDBdfQ==
+eyJoaXN0b3J5IjpbOTY1NjY5NjYsLTk2NDY2Mzg5OCwxMjIwNT
+k1NTAwXX0=
 -->
