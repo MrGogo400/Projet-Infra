@@ -192,8 +192,8 @@ L'installation ce fait en une seul ligne de commande.
 ### Cloud-Torrent :
 
     docker run -d -p 3000:3000 -v /path/to/my/downloads:/downloads jpillora/cloud-torrent
-Vue que c'est un docker l'insn
+Vue que c'est un docker "l'installation" ce fait aussi en une seul ligne de commande.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NDg0NDAyNDMsLTk2NDY2Mzg5OCwxMj
-IwNTk1NTAwXX0=
+eyJoaXN0b3J5IjpbNzcyMjU2NjQ2LC05NjQ2NjM4OTgsMTIyMD
+U5NTUwMF19
 -->
